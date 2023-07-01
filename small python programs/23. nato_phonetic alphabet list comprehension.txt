@@ -1,0 +1,56 @@
+import pandas as pd
+
+if __name__ == "__main__":
+    nato_data = pd.read_csv("nato_phonetic_alphabet.csv")
+    dictionary = {row.letter: row.code for (index, row) in nato_data.iterrows()}
+    def generate_phonetic():
+      word = input("Enter the word to get phonetic alphabet: ").upper()
+      try:
+        user_phonetic = [dictionary[alphabet] for alphabet in word]
+      except: 
+        print("Sorry, only letters in the alphabet please.")
+        generate_phonetic()
+      else:
+        print(user_phonetic)
+        
+    generate_phonetic()
+  
+    # for letter in word:
+    #     for (index, row) in nato_data.iterrows():
+    #         if row.letter == letter:
+    #             print(f"{row.letter} for {row.code}")
+
+    # above code in 2 lines using dataframe
+    # for alphabet in word:
+    #     [print(f"{row.letter} for {row.code}") for (index, row) in nato_data.iterrows() if row.letter == alphabet]
+
+
+# nato_phonetic_alphabet.csv
+# letter,code
+# A,Alfa
+# B,Bravo
+# C,Charlie
+# D,Delta
+# E,Echo
+# F,Foxtrot
+# G,Golf
+# H,Hotel
+# I,India
+# J,Juliet
+# K,Kilo
+# L,Lima
+# M,Mike
+# N,November
+# O,Oscar
+# P,Papa
+# Q,Quebec
+# R,Romeo
+# S,Sierra
+# T,Tango
+# U,Uniform
+# V,Victor
+# W,Whiskey
+# X,X-ray
+# Y,Yankee
+# Z,Zulu
+

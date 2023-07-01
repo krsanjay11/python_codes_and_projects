@@ -1,0 +1,24 @@
+# Write your code below this line 👇
+
+age = input("what is your current age: ")
+year = int(age)
+day = year*365
+week = year*52
+month = year*12
+month = int(month)
+week = int(week)
+day = int(day)
+print(f'months: {month} weeks: {week} days: {day}')
+
+year_left = 90 - int(age)
+day_left = year_left*365
+week_left = year_left*52
+month_left = year_left*12
+month_left = int(month_left)
+week_left = int(week_left)
+day_left = int(day_left)
+print(f'left in years: {year_left} months: {month_left} weeks: {week_left} days: {day_left}')
+
+# what is your current age: 24
+# months: 288 weeks: 1248 days: 8760
+# left in years: 66 months: 792 weeks: 3432 days: 24090

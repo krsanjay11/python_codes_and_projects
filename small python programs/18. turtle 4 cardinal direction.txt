@@ -1,0 +1,31 @@
+from turtle import Turtle, Screen
+from random import choice, randint
+import turtle as t
+
+doer_pet = Turtle()
+screen = Screen()
+
+def move_right():
+    doer_pet.setheading(0)
+    doer_pet.forward(10)
+
+def move_up():
+    doer_pet.setheading(90)
+    doer_pet.forward(10)
+
+def move_down():
+    doer_pet.setheading(270)
+    doer_pet.forward(10)
+
+def move_left():
+    doer_pet.setheading(180)
+    doer_pet.forward(10)
+
+if __name__ == '__main__':
+
+    screen.listen()
+    screen.onkey(fun=move_up, key="i")
+    screen.onkey(fun=move_down, key="k")
+    screen.onkey(fun=move_right, key="l")
+    screen.onkey(fun=move_left, key="j")
+    screen.exitonclick()  # screen exit on click

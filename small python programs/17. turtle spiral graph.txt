@@ -1,0 +1,37 @@
+from turtle import Turtle, Screen
+from random import choice, randint
+import turtle as t
+# make a spirograph
+
+
+def randomcolor():
+    r = randint(0, 255)
+    g = randint(0, 255)
+    b = randint(0, 255)
+    return (r, g, b)
+
+
+def draw_spiral(size_of_gap):
+    for _ in range(int(360 / size_of_gap)):
+        doer_pet.pencolor(randomcolor())
+        doer_pet.circle(100)
+        doer_pet.setheading(doer_pet.heading() + size_of_gap)
+
+
+if __name__ == '__main__':
+    t.colormode(255)
+    doer_pet = Turtle()
+    steps = 0
+    doer_pet.speed("fastest")
+
+    # 1
+    # steps = 0
+    # while steps <= 400:
+    #     if steps % 4 == 0:
+    #         doer_pet.pencolor(randomcolor())
+    #         doer_pet.circle(100)
+    #         doer_pet.setheading(steps)
+    #     steps+=1
+    draw_spiral(5)
+    screen = Screen()
+    screen.exitonclick()  # screen exit on click

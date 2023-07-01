@@ -1,0 +1,103 @@
+import random as r
+from replit import clear
+cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
+logo = '''
+ _     _            _    _            _    
+| |   | |          | |  (_)          | |   
+| |__ | | __ _  ___| | ___  __ _  ___| | __
+| '_ \| |/ _` |/ __| |/ / |/ _` |/ __| |/ /
+| |_) | | (_| | (__|   <| | (_| | (__|   < 
+|_.__/|_|\__,_|\___|_|\_\ |\__,_|\___|_|\_\                
+                      |__/                 '''
+logo2 = '''
+  _ _ _ _ ___ ___ _ _ _ ___ _ _ _________
+ |A|Q|1|5|4  |7  |J|1|9|7  |A|K|2        |
+ |@|@|@|@|@  |## |O|O|O|OO |+|+|+        |
+ | | | | | @ |   | | | |   | | |    +    |
+ | | | | |   | # | | | | O | | |         |
+ | | | | | @ |   | | | |   | | |    +    |
+ | | | | |   | # | | | | O | | |        +|
+ | | | | |   |   | | | |   | | |        Z|
+  ~ ~ ~ ~ ~~~ ~~~ ~ ~ ~ ~~~ ~ ~ ~~~~~~~~~
+'''
+def random_pair_card():
+  """ Return a pair of random card """
+  list = []
+  for _ in range(2):
+    list.append(r.choice(cards))
+  return list
+
+def calculate_sum(cards):
+  """Calculate the list's sum"""
+  if sum(cards) == 21 and len(cards)==2:
+    return 0
+  if 11 in cards and sum(cards) > 21:
+    print("you got an ace")
+    cards.remove(11)
+    cards.append(1)
+  return sum(cards)
+
+def compare_score(player_score, dealer_score):
+  """Using players' and dealer's score. it will return results"""
+  if player_score==dealer_score:
+    return "Game Draw"
+  elif player_score==0:
+    return "You got the Black jack. you loosed the Game. better luck next time."
+  elif dealer_score==0:
+    return "Dealer got the Black jack. you Won the Game. Congratulations!!!."
+  elif ((dealer_score > 21) or player_score> dealer_score and player_score <=21):
+    msg=""
+    if(dealer_score > 21):
+      msg = "Dealer's card value is over 21.\n"
+    msg+="You won the Game. Congratulations!!!"
+    return msg
+  else:
+    msg=""
+    if(player_score>21):
+      msg = "your total card value is over 21.\n"
+    msg+="You loosed the Game. Better luck next time."
+    return msg
+
+is_game_over = False
+while not is_game_over:
+  #starting of Game
+  clear()
+  print("Welcome to Black Jack Game.")
+  print(logo, logo2)
+  player = random_pair_card()
+  dealer = random_pair_card()
+  player_score = calculate_sum(player)
+  dealer_score = calculate_sum(dealer)
+  print(f"your cards: {player}, current score: {player_score}\nDealer's first card: {dealer[0]}")
+  
+  # Player's turn
+  is_player_done = False
+  while player_score!=0 and player_score< 22 and not is_player_done:
+    decision = input("Type 'y' to get another card, type 'n' to pass: ").lower()
+    if decision=="" or decision[0]=="n":
+      is_player_done = True
+    elif decision[0]=="y":
+      player.append(r.choice(cards))
+      player_score = calculate_sum(player)
+    print(f"your cards: {player}, your score: {player_score}")
+    
+  # Dealer's Turn 
+  if player_score==0 or dealer_score==0 or player_score > 21:
+    pass
+  else:
+    while dealer_score!=0 and dealer_score < 17:
+      dealer.append(r.choice(cards))
+      dealer_score = calculate_sum(dealer)
+
+  #printing Result
+  print()
+  print(f"your cards: {player}, your score: {player_score}\nDealer's cards: {dealer}, Dealer's score: {dealer_score}")
+  print()
+  print(compare_score(player_score, dealer_score))
+  print()
+  decision = input("Do you want to play a game of blackjack again? Type 'y' or 'n': ").lower()
+  if decision=="":
+    pass
+  elif decision[0] == 'n':
+    is_game_over = True
+    print("Thank you for your time. Goodbye!!!")

@@ -1,0 +1,18 @@
+from turtle import Turtle, Screen
+
+colour_list = ["black", "blue", "green", "brown", "tan", "purple2", "yellow", "seashell4"]
+if __name__ == '__main__':
+    doer_pet = Turtle()
+    doer_pet.color("red")
+    i=0
+    for sides in range(3, 11):
+        steps = sides
+        angle = 360/sides
+        doer_pet.pencolor(colour_list[i])
+        while steps:
+            doer_pet.forward(80)
+            doer_pet.right(angle)
+            steps-=1
+        i+=1
+    screen = Screen()
+    screen.exitonclick()  # screen exit on click

@@ -1,0 +1,25 @@
+from turtle import Turtle, Screen
+from random import choice, randint
+import turtle as t
+
+
+def randomcolor():
+    r = randint(0, 255)
+    g = randint(0, 255)
+    b = randint(0, 255)
+    return (r, g, b)
+
+if __name__ == '__main__':
+    t.colormode(255)
+    doer_pet = Turtle()
+    doer_pet.color("red")angle = [0, 90, 180, 270]
+    steps = 200
+    doer_pet.speed(10)
+    doer_pet.pensize(15)
+    while steps:
+        doer_pet.forward(30)
+        doer_pet.pencolor(randomcolor())
+        doer_pet.setheading(choice(angle))
+        steps-=1
+    screen = Screen()
+    screen.exitonclick()  # screen exit on click

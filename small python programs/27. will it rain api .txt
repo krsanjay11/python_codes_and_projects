@@ -1,0 +1,33 @@
+from key import API_KEY
+import requests
+
+# API_KEY = "apikey"
+
+HOURLY_3_ENDPOINT = "https://api.openweathermap.org/data/2.5/forecast"
+WEATHER_ENDPOINT = "https://api.openweathermap.org/data/2.5/weather"
+parameters = {
+    "lat": 30.7343,
+    "lon": 76.7933,
+    "appid": API_KEY,
+}
+response = requests.get(url=HOURLY_3_ENDPOINT, params=parameters)
+response.raise_for_status()
+# print(response.url)
+
+# weather_data = response.json()["list"]
+# for i in range(6):
+#     # print(weather_data[i]["weather"][0]["id"], weather_data[i]["dt_txt"])
+#     if weather_data[i]["weather"][0]["id"] < 800:
+#         print("bring umbrella", weather_data[i]["weather"][0]["id"], weather_data[i]["dt_txt"])
+
+
+weather_data = response.json()["list"][:6]
+will_rain = False
+for weather in weather_data:
+    condition_code = int(weather["weather"][0]["id"])
+    if (condition_code < 800):
+        will_rain = True
+
+if will_rain:
+    print("bring umbrella")
+

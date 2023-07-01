@@ -1,0 +1,25 @@
+from replit import clear
+print("Welcome to the secret auction program")
+print()
+auction={}
+new_bidder =1
+while new_bidder:
+  clear()
+  name = input("What's is your name: ")
+  bid = int(input("What's your bid?: $"))
+  auction[name] = bid
+  more = input("Are there any other bidders? Type 'yes' or 'no': ")
+  if more=="":
+    more = 'y'
+  if more[0]=='n':
+    new_bidder = 0
+highest_bid=0
+winner=""
+for name in auction:
+  if auction[name] > highest_bid:
+    highest_bid = auction[name]
+    winner = name 
+clear()
+print(auction)
+print(f'{winner} won this auction at {highest_bid}.')
+  

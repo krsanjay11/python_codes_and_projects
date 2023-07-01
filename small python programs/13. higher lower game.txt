@@ -1,0 +1,57 @@
+from replit import clear
+from random import choice as rchoice
+from game_data import data, logo, vs
+
+def format_data(account):
+  """Format the account data into printable format"""
+  return f'{account["name"]}, a {account["description"]}, from {account["country"]}'
+
+def check_result(a_followers, b_followers, guess):
+  """check result, return true if guess is correct"""
+  if a_followers > b_followers:
+    return guess=="a"
+  else:
+    return guess=="b"
+  
+
+def game():
+  is_game_over = False
+  scores = 0
+  account_b = rchoice(data)
+  while not is_game_over:
+    clear()
+    print(logo)
+    print()
+    account_a = account_b
+    account_b = rchoice(data)
+    while account_a == account_b:
+      account_b = rchoice(data)
+    if scores != 0:
+      print(f"You're right! Current score: {scores}")
+    print("Compare A:", format_data(account_a))
+    print(vs)
+    print("Compare B:", format_data(account_b))
+    guess = "incorrect choice"
+    while not (guess == "a" or guess == "b"):
+      if guess != "incorrect choice":
+        print("Invalid Choice. please choose again")
+      guess = input("who has more followers? Type 'A' or 'B': ").lower()
+    
+    if check_result(account_a["follower_count"], account_b["follower_count"], guess):
+      scores += 1
+      continue
+    else:
+      clear()
+      print(logo)
+      print()
+      print(f"You loose the game. The final score: {scores}")
+    choice = input(
+      "do you want to play Higher lower again? 'yes' or 'no': ").lower()
+    if choice == "" or choice[0] == "y":
+      scores = 0
+    elif choice[0] == "n":
+      print("GoodBye. Have a nice day.")
+      is_game_over = True
+
+
+game()

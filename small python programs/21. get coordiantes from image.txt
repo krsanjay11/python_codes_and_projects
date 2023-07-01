@@ -1,0 +1,33 @@
+import pandas as pd
+import turtle
+
+states = [["S_no", "State_name"]]
+sindex = 1;
+def get_mouse_click_coor(x, y):
+    global sindex
+    states[sindex].append(x)
+    states[sindex].append(y)
+    sindex+=1
+    # print(f"x: {x}, y:  {y}")
+
+if __name__ == "__main__":
+    state_coordinates = pd.read_csv("indian states.csv")
+    list_of_states_s_no = state_coordinates["S.NO"].to_list()
+    list_of_states_name = state_coordinates.State.to_list()
+    # print(list_of_states_s_no, list_of_states_name)
+
+    for i in range(len(list_of_states_s_no)):
+        states.append([list_of_states_s_no[i], list_of_states_name[i]])
+    states[0].append("x")
+    states[0].append("y")
+    screen = turtle.Screen()
+    screen.title("India States and UT Game")
+    # image = "blank_states_img.gif"
+    image = "india-map.gif"
+    screen.addshape(image)
+    turtle.shape(image)
+    turtle.onscreenclick(get_mouse_click_coor)
+    turtle.mainloop()
+
+    state_data = pd.DataFrame(states)
+    state_data.to_csv("Inida states coordinates", index=False)

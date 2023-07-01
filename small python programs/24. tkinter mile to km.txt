@@ -1,0 +1,39 @@
+from tkinter import *
+
+def calculate_distance_mile_km():
+    km = miles_input.get()
+    if km != "" and km != '0':
+        km = round(float(km) * 1.609, 2)
+    else:
+        km = "0"
+    km_value["text"] = km
+
+
+if __name__ == "__main__":
+    window = Tk()
+    window.title("Mile to Km converter")
+    window.minsize(width = 300, height=100)
+    window.config(padx=50, pady=20)
+
+    equal_text = Label(text="is equal to ", font=("Arial", 10, "bold"))
+    equal_text.grid(row=1, column=0)
+
+    miles_text = Label(text="Miles", font=("Arial", 10, "bold"))
+    miles_text.grid(row=0, column=2)
+    miles_text.config(padx=10)
+
+    miles_input = Entry(width=10)
+    miles_input.insert(END, 0)
+    miles_input.grid(row=0, column=1)
+
+    km_value = Label(text="0", font=("Arial", 10, "bold"))
+    km_value.grid(row=1, column=1)
+
+    km_text = Label(text="Km", font=("Arial", 10, "bold"))
+    km_text.grid(row=1, column=2)
+
+    buttons = Button(text="Calculate", command=calculate_distance_mile_km)
+    buttons.grid(row=2, column=1)
+
+
+    window.mainloop()
